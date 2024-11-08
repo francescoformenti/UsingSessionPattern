@@ -146,7 +146,7 @@ The `DisposableBase` class simply implements the `IDisposable` pattern.
 If the `EndSession` method has not been explicitly called, the `IDisposable.Dispose` will call it.
 
 ## DbConnectionOpenSession
-This class is the first and more simple that derives and implements `UsingSessionBase` abstract class:
+This class derives and implements `UsingSessionBase` abstract class:
 ````
 public class DbConnectionOpenSession : UsingSessionBase
 {
