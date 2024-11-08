@@ -40,6 +40,7 @@ In addition, since the `DbConnectionOpenSession` created by the `OpenSession` ex
 The pattern becomes more useful as the complexity increases, for example adding a `IDbTransaction` to the previous code snippet:
 
 ````
+var connection = this.CreateConnection();
 connection.Open();
 try
 {
@@ -69,6 +70,7 @@ finally
 With the **Using Session Pattern** the amount of lines decreases significantly:
 
 ````
+var connection = this.CreateConnection();
 using (connection.OpenSession())
 {
 	using var transaction = connection.BeginTransactionSession();
@@ -83,6 +85,7 @@ using (connection.OpenSession())
 If you are using older version of .NET, like .NET Framework or .NET Standard 2.0, or if you don't like the `using` variable declarations, the amount of lines does not change at all:
 
 ````
+var connection = this.CreateConnection();
 using (connection.OpenSession())
 using (var transaction = connection.BeginTransactionSession())
 using (var cmd = connection.CreateCommand())
