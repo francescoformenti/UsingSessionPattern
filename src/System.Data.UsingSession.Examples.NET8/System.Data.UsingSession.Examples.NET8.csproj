@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\System.Data.UsingSession\System.Data.UsingSession.csproj" />
+    <ProjectReference Include="..\System.Data.UsingSession\System.Data.UsingSession.csproj" />
   </ItemGroup>
 
 </Project>

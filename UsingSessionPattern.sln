@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsingSessionPattern", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Data.UsingSession", "src\System.Data.UsingSession\System.Data.UsingSession.csproj", "{84D0B9ED-FDD4-466D-AAF3-5B7D94477298}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Data.UsingSession.Examples.NETStandard", "System.Data.UsingSession.Examples.NETStandard\System.Data.UsingSession.Examples.NETStandard.csproj", "{0D081071-5EE9-420F-8DD0-E0FEE484FEDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Data.UsingSession.Examples.NETStandard", "src\System.Data.UsingSession.Examples.NETStandard\System.Data.UsingSession.Examples.NETStandard.csproj", "{0D081071-5EE9-420F-8DD0-E0FEE484FEDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Data.UsingSession.Examples.NET8", "System.Data.UsingSession.Examples.NET8\System.Data.UsingSession.Examples.NET8.csproj", "{DEDD81ED-FBE7-4178-9419-359B9CADFE7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Data.UsingSession.Examples.NET8", "src\System.Data.UsingSession.Examples.NET8\System.Data.UsingSession.Examples.NET8.csproj", "{DEDD81ED-FBE7-4178-9419-359B9CADFE7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
