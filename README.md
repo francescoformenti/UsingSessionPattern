@@ -4,7 +4,7 @@ Pattern for resource sessions enclosed in a using c# statement
 This pattern aims to reduce the lines of code, and potential errors, when a class behaves similarly, but not equal to an `IDisposable` implementation.
 
 ## IDbConnection
-For example: the `IDbConnection` has `Open()` and `Close` methods that should be enclosed in a `try .. catch` statement to be consistent:
+For example: the `IDbConnection` has `Open()` and `Close()` methods that should be enclosed in a `try .. catch` statement to be consistent:
 
 ````
 var connection = this.CreateConnection();
