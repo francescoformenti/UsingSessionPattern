@@ -83,6 +83,8 @@ using (connection.OpenSession())
 	transaction.Commit();
 }
 ````
+You don't have to worry about the `Rollback`, that would be called automatically if `Commit` is not called before the `DbTransactionSession` instance is disposed; for example if an exception occurs before the call to `Commit`.
+
 
 If you are using older version of .NET, like .NET Framework or .NET Standard 2.0, or if you don't like the `using` variable declarations, the amount of lines does not change at all:
 
