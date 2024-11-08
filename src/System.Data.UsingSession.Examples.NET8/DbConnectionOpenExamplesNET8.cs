@@ -20,11 +20,9 @@ namespace System.Data.UsingSession.Examples.NET8
 			connection.Open();
 			try
 			{
-				using (var cmd = connection.CreateCommand())
-				{
-					cmd.CommandText = "UPDATE Persons SET Name='Foo' WHERE ID=1";
-					cmd.ExecuteNonQuery();
-				}
+				using var cmd = connection.CreateCommand();
+				cmd.CommandText = "UPDATE Persons SET Name='Foo' WHERE ID=1";
+				cmd.ExecuteNonQuery();
 			}
 			finally
 			{

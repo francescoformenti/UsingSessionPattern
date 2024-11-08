@@ -64,12 +64,10 @@ namespace System.Data.UsingSession.Examples.NET8
 				var transaction = connection.BeginTransaction();
 				try
 				{
-					using (var cmd = connection.CreateCommand())
-					{
-						cmd.Transaction = transaction;
-						cmd.CommandText = "UPDATE Persons SET Name='Foo' WHERE ID=1";
-						cmd.ExecuteNonQuery();
-					}
+					using var cmd = connection.CreateCommand();
+					cmd.Transaction = transaction;
+					cmd.CommandText = "UPDATE Persons SET Name='Foo' WHERE ID=1";
+					cmd.ExecuteNonQuery();
 					transaction.Commit();
 				}
 				catch
