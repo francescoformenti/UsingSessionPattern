@@ -1,10 +1,11 @@
 # Using Session Pattern
-Pattern for resource sessions enclosed in a using c# statement
+A pattern for managing resource sessions using the `using` statement in C#
 
 This pattern aims to reduce the lines of code, and potential errors, when a class behaves similarly, but not equal to an `IDisposable` implementation.
+This pattern helps reduce the amount of lines of code and minimize errors when a class behaves similarly to, but does not implement, `IDisposable` or should be put in a `try .. finally` block.
 
 ## IDbConnection
-For example: the `IDbConnection` has `Open()` and `Close()` methods that should be enclosed in a `try .. finally` statement to be consistent:
+Consider the `IDbConnection`, which has `Open()` and `Close()` methods that should be enclosed in a `try...finally` block for proper resource management:
 
 ````
 var connection = this.CreateConnection();
@@ -21,7 +22,7 @@ finally
 }
 ````
 
-With this pattern, the code can be reduced with the help of a `IDisposable` class named `DbConnectionOpenSession` that opens the connection when created, and closes it when disposed.
+With this pattern, the code can be streamlined using an `IDisposable` class named `DbConnectionOpenSession`, which automatically opens the connection when created and closes it when disposed.
 
 ````
 var connection = this.CreateConnection();
@@ -33,11 +34,11 @@ using (connection.OpenSession())
 }
 ````
 
-Note that the `IDbConnection` itself is not disposed, as it is the `DbConnectionOpenSession` that is disposed, so the `IDbConnection` can be used and opened again later.  
-In addition, since the `DbConnectionOpenSession` created by the `OpenSession` extension method is quite useless, you can avoid declaring a variable name for it, letting the using statement to Dispose it when its scope ends.
+Note that in this case, the `IDbConnection` itself is not disposed; instead, it's the `DbConnectionOpenSession` that is disposed, which allows you to reuse the `IDbConnection` later.  
+Additionally, since the `DbConnectionOpenSession` created by the `OpenSession` extension method is effectively "useless", you can omit the variable declaration, letting the using statement to Dispose it when its scope ends.
 
 ## IDbTransaction
-The pattern becomes more useful as the complexity increases, for example adding a `IDbTransaction` to the previous code snippet:
+The pattern becomes even more useful when dealing with more complex scenarios, such as adding a `IDbTransaction` to the mix. Consider the following code:
 
 ````
 var connection = this.CreateConnection();
@@ -65,7 +66,7 @@ finally
 }
 ````
 
-With the **Using Session Pattern** the amount of lines decreases significantly:
+With the **Using Session Pattern** the code becomes more concise:
 
 ````
 var connection = this.CreateConnection();
@@ -79,8 +80,7 @@ using (connection.OpenSession())
 	transaction.Commit();
 }
 ````
-You don't have to worry about the `Rollback`, that would be called automatically if `Commit` is not called before the `DbTransactionSession` instance is disposed; for example if an exception occurs before the call to `Commit`.
-
+Here, you no longer need to manually handle `Rollback`. If `Commit` is not called before the `DbTransactionSession` is disposed, the transaction will be automatically rolled back in the `Dispose()` method.
 
 If you are using older version of .NET, like .NET Framework or .NET Standard 2.0, or if you don't like the `using` variable declarations, the amount of lines does not change at all:
 
@@ -98,7 +98,7 @@ using (var cmd = connection.CreateCommand())
 ````
 
 ## IUsingSession
-The pattern is quite simple: it is based on the `IUsingSession` interface:
+The pattern is built around the simple `IUsingSession` interface:
 ````
 public interface IUsingSession : IDisposable
 {
@@ -110,7 +110,7 @@ public interface IUsingSession : IDisposable
 }
 ````
 ## UsingSessionBase
-`IUsingSession` base implementation `UsingSessionBase` is quite simple too:
+The base class `UsingSessionBase` provides a simple implementation for managing session lifecycles:
 ````
 public abstract class UsingSessionBase : DisposableBase, IUsingSession
 {
@@ -136,13 +136,13 @@ public abstract class UsingSessionBase : DisposableBase, IUsingSession
 
 }
 ````
-It is an abstract class on which there is the abstract method `DoEndSession` that can be overridden in derived classes to perform the release of the resource.  
-The `DisposableBase` class simply implements the `IDisposable` pattern.
+This abstract class ensures that resources are cleaned up by overriding the `Dispose()` method of `DisposableBase`, which is an implementation of the `IDisposable` pattern.  
+The `DoEndSession()` method is abstract and can be implemented in derived classes to perform specific resource cleanup.
 
 If the `EndSession` method has not been explicitly called, the `IDisposable.Dispose` will call it.
 
 ## DbConnectionOpenSession
-This class derives and implements `UsingSessionBase` abstract class:
+The `DbConnectionOpenSession` class implements the `UsingSessionBase` abstract class:
 ````
 public class DbConnectionOpenSession : UsingSessionBase
 {
