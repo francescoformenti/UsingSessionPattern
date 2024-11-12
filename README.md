@@ -180,4 +180,5 @@ public static class SystemDataExtensions
 ````
 
 ## Conclusions
-This pattern could be used for almost everything that could be nested in a `try .. finally` block and should do very simple but repetitive tasks
+The **Using Session Pattern** is a useful approach for handling resources that need to be managed within a `try...finally` block, simplifying error handling and resource cleanup while reducing boilerplate code.  
+This pattern is especially useful in scenarios involving database connections and transactions, but can be applied to many other resource management tasks.
