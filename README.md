@@ -33,7 +33,7 @@ using (connection.OpenSession())
 }
 ````
 
-Note that in this case, the `IDbConnection` itself is not disposed; instead, it's the `DbConnectionOpenSession` that is disposed, which allows you to reuse the `IDbConnection` later.  
+Note that in this case, the `IDbConnection` itself is not disposed; instead, it's the `DbConnectionOpenSession`, created by the `OpenSession()` method, that is disposed, which allows you to reuse the `IDbConnection` later.  
 Additionally, since the `DbConnectionOpenSession` created by the `OpenSession` extension method is effectively "useless", you can omit the variable declaration, letting the using statement to Dispose it when its scope ends.
 
 ## IDbTransaction
