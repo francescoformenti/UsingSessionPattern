@@ -1,7 +1,6 @@
 # Using Session Pattern
 A pattern for managing resource sessions with the `using` statement in C#
 
-This pattern aims to reduce the lines of code, and potential errors, when a class behaves similarly, but not equal to an `IDisposable` implementation.
 This pattern helps reduce the amount of lines of code and minimize errors when a class behaves similarly to, but does not implement, `IDisposable` or should be put in a `try .. finally` block.
 
 ## IDbConnection
